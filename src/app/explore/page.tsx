@@ -1,48 +1,51 @@
-// src/app/explore/page.tsx
-import { createClient } from '@/utils/supabase/server'
-import { TrackFilterExplorer } from '@/components/content/track-filter-explorer'
-import Link from 'next/link'
+import { Header } from "@/components/layout/header";
+import { Footer } from "@/components/layout/footer";
+import { ExploreHero } from "./explore-hero";
+import { SearchFilterBar } from "./search-filter-bar";
+import { CategoryPills } from "./category-pills";
+import { ContentGrid } from "./content-grid";
+import { CONTENT_ITEMS } from "./content-data";
 
-export default async function ExplorePage() {
-    const supabase = await createClient()
-
-    const [{ data: tracks }, { data: projects }, { data: tutorials }] = await Promise.all([
-        supabase.from('tracks').select('id, name, slug, description').order('name'),
-        supabase
-            .from('projects')
-            .select('id, track_id, title, slug, description, difficulty, thumbnail_url, repo_url, demo_url')
-            .eq('is_published', true)
-            .order('created_at', { ascending: false }),
-        supabase
-            .from('tutorials')
-            .select('id, track_id, title, slug, description, difficulty, estimated_minutes, thumbnail_url')
-            .eq('is_published', true)
-            .order('created_at', { ascending: false }),
-    ])
-
+export default function ExplorePage() {
     return (
-        <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-            <div className="mb-10">
-                <Link
-                    href="/dashboard"
-                    className="mb-5 inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 transition-colors hover:text-slate-900"
-                >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                    </svg>
-                    Back to Dashboard
-                </Link>
-                <h1 className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">Explore</h1>
-                <p className="mt-2 text-base text-slate-500">
-                    Projects and tutorials curated for every skill level.
-                </p>
-            </div>
+        <div className="min-h-screen bg-white flex flex-col">
+            <Header />
 
-            <TrackFilterExplorer
-                tracks={tracks ?? []}
-                initialProjects={projects ?? []}
-                initialTutorials={tutorials ?? []}
-            />
+            <main className="flex-1">
+                <div className="max-w-7xl mx-auto px-6 lg:px-8 py-10">
+                    <ExploreHero />
+
+                    <div className="mt-8">
+                        <SearchFilterBar />
+                    </div>
+
+                    <div className="mt-6">
+                        <CategoryPills />
+                    </div>
+
+                    <div className="mt-10">
+                        <div className="flex items-center justify-between mb-5">
+                            <h2 className="text-lg font-semibold text-gray-900">
+                                Recommended for you{" "}
+                                <span className="ml-2 align-middle inline-block text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full px-2.5 py-1">
+                                    Based on your goals
+                                </span>
+                            </h2>
+
+                            <a
+                            href="#"
+                            className="text-sm font-medium text-indigo-600 hover:text-indigo-700"
+              >
+                            View all results
+                        </a>
+                    </div>
+
+                    <ContentGrid items={CONTENT_ITEMS} />
+                </div>
         </div>
-    )
+      </main >
+
+        <Footer />
+    </div >
+  );
 }

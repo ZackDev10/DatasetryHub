@@ -17,7 +17,7 @@ export default function DashboardLayout({
               <Link href="/dashboard" className="text-sm font-medium text-surface-600 hover:text-surface-900 transition-colors">
                 Dashboard
               </Link>
-              <Link href="/explore" className="text-sm font-medium text-surface-600 hover:text-surface-900 transition-colors">
+              <Link href="/dashboard/explore" className="text-sm font-medium text-surface-600 hover:text-surface-900 transition-colors">
                 Explore
               </Link>
               <Link href="/quiz-demo" className="text-sm font-medium text-surface-600 hover:text-surface-900 transition-colors">

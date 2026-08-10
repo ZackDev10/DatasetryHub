@@ -43,7 +43,7 @@ export default async function DashboardPage() {
 
   const quickActions = [
     {
-      href: '/explore',
+      href: '/dashboard/explore',
       title: 'Explore Tracks',
       desc: 'Browse curated datasets, projects, and tutorials by track.',
       tint: 'bg-indigo-50 text-indigo-600',

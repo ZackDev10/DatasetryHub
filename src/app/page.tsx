@@ -1,37 +1,13 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Header } from '@/components/layout/header'
+import { Footer } from '@/components/layout/footer'
 
 export default function HomePage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* ─── Nav ─── */}
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/80 backdrop-blur-md">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <Link href="/" className="text-lg font-bold tracking-tight text-indigo-600">
-            DatasetryHub
-          </Link>
-          <nav className="flex items-center gap-3 sm:gap-4">
-            <Link
-              href="/explore"
-              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Explore
-            </Link>
-            <Link
-              href="/login"
-              className="text-sm font-medium text-slate-600 hover:text-slate-900 transition-colors"
-            >
-              Sign in
-            </Link>
-            <Link
-              href="/signup"
-              className="rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-md hover:bg-indigo-600 transition-colors"
-            >
-              Get started
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Header />
 
       {/* ─── Hero ─── */}
       <section>
@@ -170,12 +146,152 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ─── Footer ─── */}
-      <footer className="border-t border-slate-200 bg-white py-6">
-        <div className="mx-auto max-w-7xl px-4 text-center text-xs text-slate-400 sm:px-6 lg:px-8">
-          &copy; 2026 DatasetryHub. Built for the data engineering community.
+      {/* ─── Featured Learning Tracks ─── */}
+      <section className="border-t border-slate-200 bg-slate-50 py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-2xl">
+            <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
+              Featured Learning Tracks
+            </h2>
+            <p className="mt-3 text-base leading-relaxed text-slate-500">
+              Hand-picked tracks that take you from first principles to production-ready skills,
+              taught by working data practitioners.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                category: 'Data Engineering',
+                time: '18 hrs',
+                title: 'Data Engineering Fundamentals',
+                desc: 'Design resilient pipelines, model warehouses, and orchestrate batch and streaming jobs from scratch.',
+                level: 'Beginner',
+                accent: 'from-indigo-500 to-violet-500',
+              },
+              {
+                category: 'Statistics',
+                time: '24 hrs',
+                title: 'Advanced Statistical Modeling',
+                desc: 'Move beyond linear regression into Bayesian inference, mixed-effects models, and causal analysis.',
+                level: 'Advanced',
+                accent: 'from-pink-500 to-rose-500',
+              },
+              {
+                category: 'Machine Learning',
+                time: '20 hrs',
+                title: 'Applied Machine Learning',
+                desc: 'Build, evaluate, and ship ML models with real datasets, from feature engineering to deployment.',
+                level: 'Intermediate',
+                accent: 'from-emerald-500 to-teal-500',
+              },
+            ].map((track) => (
+              <div
+                key={track.title}
+                className="group flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition-shadow hover:shadow-lg"
+              >
+                <div className={`h-1.5 w-full bg-gradient-to-r ${track.accent}`} />
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex items-center rounded-full bg-indigo-50 px-2.5 py-1 text-xs font-semibold text-indigo-600">
+                      {track.category}
+                    </span>
+                    <span className="flex items-center gap-1 text-xs font-medium text-slate-400">
+                      <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6l4 2m6-2a10 10 0 11-20 0 10 10 0 0120 0z" />
+                      </svg>
+                      {track.time}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 text-lg font-semibold text-slate-900">{track.title}</h3>
+                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-500">{track.desc}</p>
+
+                  <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
+                    <span className="text-xs font-medium text-slate-400">{track.level}</span>
+                    <Link
+                      href="/explore"
+                      className="text-sm font-semibold text-indigo-600 group-hover:text-indigo-700 transition-colors"
+                    >
+                      View track &rarr;
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      </footer>
+      </section>
+
+      {/* ─── Newsletter Block ─── */}
+      <section className="border-t border-slate-200 bg-white py-16">
+        <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="text-2xl font-extrabold tracking-tight text-slate-900 sm:text-3xl">
+            Stay updated with new datasets
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-base leading-relaxed text-slate-500">
+            Get a short email whenever we publish a new track, dataset, or tutorial. No spam,
+            unsubscribe anytime.
+          </p>
+
+          <form className="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row">
+            <label htmlFor="newsletter-email" className="sr-only">
+              Email address
+            </label>
+            <input
+              id="newsletter-email"
+              type="email"
+              required
+              placeholder="you@example.com"
+              className="w-full rounded-full border border-slate-300 bg-white px-5 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500/30"
+            />
+            <button
+              type="submit"
+              className="inline-flex shrink-0 items-center justify-center rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-md hover:bg-indigo-600 transition-colors"
+            >
+              Subscribe
+            </button>
+          </form>
+        </div>
+      </section>
+
+      {/* ─── Bottom CTA Banner ─── */}
+      <section className="relative overflow-hidden bg-slate-900 py-20">
+        <div
+          className="pointer-events-none absolute inset-0 opacity-40"
+          style={{
+            background:
+              'radial-gradient(600px circle at 20% 20%, rgba(99,102,241,0.35), transparent 60%), radial-gradient(500px circle at 80% 80%, rgba(129,140,248,0.25), transparent 60%)',
+          }}
+        />
+        <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            Ready to accelerate your data career?
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-slate-300">
+            Join thousands of learners building real, portfolio-ready data skills with structured
+            tracks, hands-on projects, and guidance from working practitioners.
+          </p>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="/signup"
+              className="inline-flex items-center justify-center rounded-full bg-indigo-500 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-indigo-500/30 hover:bg-indigo-600 transition-colors"
+            >
+              Get Started Now
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center rounded-full border border-slate-600 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10 transition-colors"
+            >
+              Contact Sales
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Footer ─── */}
+      <Footer />
     </div>
   )
 }
