@@ -46,6 +46,7 @@ export default async function DashboardPage() {
       href: '/dashboard/explore',
       title: 'Explore Tracks',
       desc: 'Browse curated datasets, projects, and tutorials by track.',
+      cta: 'Get started',
       tint: 'bg-indigo-50 text-indigo-600',
       icon: (
         <path
@@ -59,6 +60,7 @@ export default async function DashboardPage() {
       href: '/quiz',
       title: 'Interactive Quizzes',
       desc: 'Test your knowledge and earn XP with instant feedback.',
+      cta: 'Get started',
       tint: 'bg-amber-50 text-amber-600',
       icon: (
         <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
@@ -68,6 +70,7 @@ export default async function DashboardPage() {
       href: '/community',
       title: 'Global Chat',
       desc: 'Discuss, debug, and ship together with other data professionals.',
+      cta: 'Get started',
       tint: 'bg-green-50 text-green-600',
       icon: (
         <path
@@ -75,6 +78,20 @@ export default async function DashboardPage() {
           strokeLinejoin="round"
           d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"
         />
+      ),
+    },
+    {
+      href: '/dashboard/debugger',
+      title: 'AI Query Debugger',
+      desc: 'Execute SQL and get intelligent, AI-powered feedback on your syntax and logic.',
+      cta: 'Launch debugger',
+      tint: 'bg-purple-50 text-purple-600',
+      icon: (
+        <>
+          <path strokeLinecap="round" strokeLinejoin="round" d="m18 16 4-4-4-4" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="m6 8-4 4 4 4" />
+          <path strokeLinecap="round" strokeLinejoin="round" d="m14.5 4-5 16" />
+        </>
       ),
     },
   ]
@@ -113,7 +130,7 @@ export default async function DashboardPage() {
         {/* Quick actions grid */}
         <div>
           <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-slate-400">Jump right in</h2>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {quickActions.map((action) => (
               <Link
                 key={action.href}
@@ -129,8 +146,8 @@ export default async function DashboardPage() {
                   {action.title}
                 </h3>
                 <p className="mt-1 text-sm leading-relaxed text-slate-500">{action.desc}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-indigo-600">
-                  Get started
+                <span className="mt-auto pt-4 inline-flex items-center gap-1 text-sm font-medium text-indigo-600 group-hover:text-indigo-700">
+                  {action.cta}
                   <svg className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
                   </svg>
@@ -143,3 +160,4 @@ export default async function DashboardPage() {
     </div>
   )
 }
+
